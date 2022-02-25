@@ -12,9 +12,9 @@ const question = util.promisify(rl.question).bind(rl)
 
 const calculator = async () => {
     const allowedOperations = ['+', '-', '*', '/', '%']
-    let another = true
+    let repeat = true
 
-    while(another) {
+    while(repeat) {
         let operation = await question('Select the operation ( + - * / % ): ')
         
         // If the entered operation si not valid we go back to the while condition
@@ -57,7 +57,7 @@ const calculator = async () => {
         console.log(`Result: ${result}`)
         
         let temp = await question('Press 1 to do another operation, 0 to exit: ')
-        another = (temp.trim() === '1') ? true : false
+        repeat = (temp.trim() === '1') ? true : false
     }
     rl.close()
 }
