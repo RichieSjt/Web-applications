@@ -17,7 +17,7 @@ const calculator = async () => {
     while(repeat) {
         let operation = await question('Select the operation ( + - * / % ): ')
         
-        // If the entered operation si not valid we go back to the while condition
+        // If the entered operation is not valid we go back to the while condition
         if(!allowedOperations.includes(operation)) {
             console.log('Please enter a valid operation')
             continue
