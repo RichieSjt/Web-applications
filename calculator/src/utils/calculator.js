@@ -24,7 +24,7 @@ const calculator = async () => {
         }
 
         let firstNum = parseInt(await question('Enter first number: '))
-        let secondNum = parseInt(await question('Enter first number: '))
+        let secondNum = parseInt(await question('Enter second number: '))
         
         // If the input is not a number we go back to the while condition
         if(isNaN(firstNum) || isNaN(secondNum)) {
