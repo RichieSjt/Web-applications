@@ -1,0 +1,12 @@
+Packages
+- npm i express
+- npm i dotenv
+- npm i express-handlebars
+- npm i knex
+- npm i knex -g
+- npm i mysql2
+- npm i method-override
+
+knex commands
+- knex migrate:latest
+- knex seed:make 01_products
