@@ -3,10 +3,10 @@ extends ../layout
 block content
     a(href='/') Home
     br
-    a(href='/bicicletas') Listado
+    a(href='/bicycles') List
     br
-    h1 Actualizar bicicleta 
-    form(action=`/bicicletas/${bici.id}/update` method='POST')
+    h1 Update bicycle 
+    form(action=`/bicycles/${bici.id}/update` method='POST')
         table.table 
             tr 
                 td
@@ -20,17 +20,17 @@ block content
                     input#color(type='text' name='color' value=bici.color)
             tr 
                 td
-                    label(for='modelo') Modelo:
+                    label(for='model') Model:
                 td
-                    input#modelo(type='text' name='modelo' value=bici.modelo)
+                    input#model(type='text' name='model' value=bici.model)
             tr 
                 td
-                    label(for='lat') Ubicación (lat):
+                    label(for='lat') Location (lat):
                 td
                     input#lat(type='text' name='lat' value=bici.ubicacion[0])
             tr 
                 td
-                    label(for='lon') Ubicación (lat):
+                    label(for='lon') Location (lat):
                 td
                     input#lon(type='text' name='lon' value=bici.ubicacion[1])
             tr

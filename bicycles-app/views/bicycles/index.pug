@@ -1,0 +1,29 @@
+extends ../layout
+
+block content 
+    h1 Bicycles list
+    table.table 
+        thead 
+            tr 
+                th ID
+                th Color
+                th Modelo
+                th Ubicacion
+                th Lat
+                th Long
+        tbody 
+            each bicycle in bicycles
+                tr
+                    td=bicycle.id
+                    td=bicycle.color
+                    td=bicycle.model
+                    td=bicycle.lat
+                    td=bicycle.long
+                    td
+                        a(href='bicycles/' + bicycle.id + '/update') Editar
+                    td 
+                        form.inline(method='post' action='/bicycles/' + bicycle.id + '/delete')
+                            input(type='hidden' name='id' value= bicycle.id)
+                            button.link-button(type='submit' name='submit_param' value='submit_value' class='btn')
+                                = 'Eliminar'
+    a(href='/') Home
