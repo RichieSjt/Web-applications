@@ -8,7 +8,7 @@ module.exports = {
         connection: {
             host: process.env.DB_DEVELOPMENT_HOST || 'localhost',
             port: process.env.DB_DEVELOPMENT_PORT || '3306',
-            database: process.env.DB_DEVELOPMENT_NAME || 'test',
+            database: process.env.DB_DEVELOPMENT_NAME || 'hello_mvc',
             user: process.env.DB_DEVELOPMENT_USER || 'root',
             password: process.env.DB_DEVELOPMENT_PASSWORD || '',
         },

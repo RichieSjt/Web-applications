@@ -1,4 +1,4 @@
-// Obtaining DB connection
+// Connecting to DB
 const knex = require('../database/connection')
 
 // Creates a new product without storing it on the database

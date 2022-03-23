@@ -8,5 +8,8 @@ Packages
 - npm i method-override
 
 knex commands
+- knex init
+- knex migrate:make create_users_table
 - knex migrate:latest
 - knex seed:make 01_products
+- knex seed:run
