@@ -8,9 +8,10 @@ block content
                 th ID
                 th Color
                 th Modelo
-                th Ubicacion
                 th Lat
-                th Long
+                th Lon
+                th
+                th
         tbody 
             each bicycle in bicycles
                 tr
@@ -18,7 +19,7 @@ block content
                     td=bicycle.color
                     td=bicycle.model
                     td=bicycle.lat
-                    td=bicycle.long
+                    td=bicycle.lon
                     td
                         a(href='bicycles/' + bicycle.id + '/update') Editar
                     td 

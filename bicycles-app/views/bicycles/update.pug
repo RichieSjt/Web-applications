@@ -6,33 +6,33 @@ block content
     a(href='/bicycles') List
     br
     h1 Update bicycle 
-    form(action=`/bicycles/${bici.id}/update` method='POST')
+    form(action=`/bicycles/${bicycle.id}/update` method='POST')
         table.table 
             tr 
                 td
                     label(for='id') ID:
                 td
-                    input#id(type='text' name='id' value=bici.id)
+                    input#id(type='text' name='id' value=bicycle.id)
             tr 
                 td
                     label(for='color') Color:
                 td
-                    input#color(type='text' name='color' value=bici.color)
+                    input#color(type='text' name='color' value=bicycle.color)
             tr 
                 td
                     label(for='model') Model:
                 td
-                    input#model(type='text' name='model' value=bici.model)
+                    input#model(type='text' name='model' value=bicycle.model)
             tr 
                 td
                     label(for='lat') Location (lat):
                 td
-                    input#lat(type='text' name='lat' value=bici.ubicacion[0])
+                    input#lat(type='text' name='lat' value=bicycle.ubicacion[0])
             tr 
                 td
                     label(for='lon') Location (lat):
                 td
-                    input#lon(type='text' name='lon' value=bici.ubicacion[1])
+                    input#lon(type='text' name='lon' value=bicycle.ubicacion[1])
             tr
                 td 
                 td
