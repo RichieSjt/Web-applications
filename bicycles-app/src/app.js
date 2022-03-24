@@ -3,6 +3,7 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const appConfig = require('./configs/app')
+const methodOverride = require('method-override')
 
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
@@ -15,6 +16,7 @@ const port = appConfig.express_port
 app.set('views', path.join(__dirname, '..', 'views'))
 app.set('view engine', 'pug')
 
+app.use(methodOverride('_method'))
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))

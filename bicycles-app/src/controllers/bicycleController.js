@@ -25,22 +25,44 @@ exports.bicycle_create_post = async (req, res) => {
     res.redirect('/bicycles')
 }
 
-exports.bicycle_delete_post = (req, res) => {
+exports.bicycle_delete_post = async (req, res) => {
+    let id = req.params.id
 
+    const bicycle = await Bicycle.find(id)
 
+    if (bicycle == null) {
+        res.status(404).send('Not found')
+        return
+    }
+
+    await Bicycle.delete(bicycle.id)
     res.redirect('/bicycles')
 }
 
 exports.bicycle_update_get = async (req, res) => {
     const id = req.params.id
     const bicycle = await Bicycle.find(id)
-    console.log(req.body)
+
+    if (bicycle == null) {
+        res.status(404).send('Not found')
+        return
+    }
 
     res.render('bicycles/update', { bicycle })
 }
 
-exports.bicycle_update_post = (req, res) => {
-    
+exports.bicycle_update_put = async (req, res) => {
+    const { id, color, model, lat, lon } = req.body
+
+    const updatedBicycle = {
+        id,
+        color,
+        model,
+        lat,
+        lon,
+    }
+
+    await Bicycle.update(id, updatedBicycle)
 
     res.redirect('/bicycles')
 }

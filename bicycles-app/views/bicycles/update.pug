@@ -6,7 +6,7 @@ block content
     a(href='/bicycles') List
     br
     h1 Update bicycle 
-    form(action=`/bicycles/${bicycle.id}/update` method='POST')
+    form(action=`/bicycles/${bicycle.id}/update?_method=PUT` method='POST')
         table.table 
             tr 
                 td
@@ -27,12 +27,12 @@ block content
                 td
                     label(for='lat') Location (lat):
                 td
-                    input#lat(type='text' name='lat' value=bicycle.ubicacion[0])
+                    input#lat(type='text' name='lat' value=bicycle.lat)
             tr 
                 td
                     label(for='lon') Location (lat):
                 td
-                    input#lon(type='text' name='lon' value=bicycle.ubicacion[1])
+                    input#lon(type='text' name='lon' value=bicycle.lon)
             tr
                 td 
                 td

@@ -14,6 +14,6 @@ router.post('/:id/delete', bicycleController.bicycle_delete_post)
 
 // Update bicycle
 router.get('/:id/update', bicycleController.bicycle_update_get)
-router.post('/:id/update', bicycleController.bicycle_update_post)
+router.put('/:id/update', bicycleController.bicycle_update_put)
 
 module.exports = router

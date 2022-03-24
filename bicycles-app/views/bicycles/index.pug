@@ -21,7 +21,7 @@ block content
                     td=bicycle.lat
                     td=bicycle.lon
                     td
-                        a(href='bicycles/' + bicycle.id + '/update') Editar
+                        a(href='/bicycles/' + bicycle.id + '/update') Editar
                     td 
                         form.inline(method='post' action='/bicycles/' + bicycle.id + '/delete')
                             input(type='hidden' name='id' value= bicycle.id)
