@@ -1,22 +1,21 @@
 const mongoose = require('mongoose')
-const { isReadStream } = require('request/lib/helpers')
 const Bicicleta = require('../../models/bicicleta')
+const assert = require('assert')
 
-describe('Testing bicicletas', function(){
-    beforeEach(function(done){
-        var mongoDB = 'mongodb://localhost:27017/red_bicicletas'
+describe('Testing bicicletas', () => {
+    beforeEach((done) => {
+        const mongoDB = 'mongodb://localhost:27017/red_bicicletas'
         mongoose.connect(mongoDB, {useNewUrlParser: true})
 
         const db = mongoose.connection
         db.on('error', console.error.bind(console, 'connection error'))
-        db.once('open', function(){
-            //console.log('Connected to the test database')
+        db.once('open', () => {
             done()
         })
     })
 
-    afterEach(function(done){
-        Bicicleta.deleteMany({}, function(err, success){
+    afterEach((done) => {
+        Bicicleta.deleteMany({}, (err, success) =>{
             if(err) console.log(err)
             const db = mongoose.connection
             db.close()
@@ -27,8 +26,8 @@ describe('Testing bicicletas', function(){
     //Tests...
 
     //Checar el createInstance
-    describe('Bicicleta.createInstance', ()=>{
-        it('crea una instancia de la bicicleta', ()=>{
+    describe('Bicicleta.createInstance', () => {
+        it('crea una instancia de la bicicleta', () => {
             let bici = Bicicleta.createInstance(1, 'verde', 'urbana', [19.28, -99.13])
 
             expect(bici.code).toBe(1)
@@ -40,8 +39,8 @@ describe('Testing bicicletas', function(){
     });
 
     //Checar el allBicis
-    describe('Bicicleta.allBicis', ()=>{
-        it('comienza vacía', (done)=>{
+    describe('Bicicleta.allBicis', () => {
+        it('comienza vacía', (done) => {
             Bicicleta.allBicis(function(err, bicis){
                 expect(bicis.length).toBe(0)
                 done()
@@ -50,12 +49,12 @@ describe('Testing bicicletas', function(){
     })
 
     //Add a bike
-    describe('Bicicletas.add', ()=>{
+    describe('Bicicletas.add', () => {
         it('agrega una bici', (done)=>{
             let bici = new Bicicleta({code: 1, color: 'verde', modelo: 'urbana'})
-            Bicicleta.add(bici, function(err, newBici){
+            Bicicleta.add(bici, (err, newBici) => {
                 if(err) console.log(err)
-                Bicicleta.allBicis(function(err, bicis){
+                Bicicleta.allBicis((err, bicis) => {
                     expect(bicis.length).toEqual(1)
                     expect(bicis[0].code).toEqual(bici.code)
 
@@ -66,20 +65,20 @@ describe('Testing bicicletas', function(){
     })
 
     //Find by code
-    describe('Find a bike by its code', ()=>{
+    describe('Find a bike by its code', () => {
         it('should return bike with code 1', (done)=>{
-            Bicicleta.allBicis(function(err, bicis){
+            Bicicleta.allBicis((err, bicis) => {
                 expect(bicis.length).toBe(0)
 
                 let bici = new Bicicleta({code: 1, color: 'verde', modelo: 'urbana'})
-                Bicicleta.add(bici, function(err, newBike){
+                Bicicleta.add(bici, (err, newBike) =>{
                     if(err) console.log(err)
 
                     let bici2 = new Bicicleta({code: 2, color: 'blanca', modelo: 'montaña'})
-                    Bicicleta.add(bici2, function(err, newBike){                        
+                    Bicicleta.add(bici2, (err, newBike) => {                        
                         if(err) console.log(err)
 
-                        Bicicleta.findByCode(1, function(err, targetBici){
+                        Bicicleta.findByCode(1, (err, targetBici) => {
                             expect(targetBici.code).toBe(bici.code)
                             expect(targetBici.color).toBe(bici.color)
                             expect(targetBici.modelo).toBe(bici.modelo)
@@ -94,18 +93,18 @@ describe('Testing bicicletas', function(){
 
 
     //Remove by code
-    describe('Remove a bike by its code', ()=>{
+    describe('Remove a bike by its code', () => {
         it('should delete bike with code 1', (done)=>{
-            Bicicleta.allBicis(function(err, bicis){
+            Bicicleta.allBicis((err, bicis) => {
                 expect(bicis.length).toBe(0)
 
                 let bici = new Bicicleta({code: 1, color: 'verde', modelo: 'urbana'})
-                Bicicleta.add(bici, function(err, newBike){
+                Bicicleta.add(bici, (err, newBike) => {
                     if(err) console.log(err)
-                    Bicicleta.allBicis(function(err, bicis){
+                    Bicicleta.allBicis((err, bicis) => {
                         expect(bicis.length).toBe(1)
-                        Bicicleta.removeByCode(1, function(err, cb){
-                            Bicicleta.allBicis(function(err, bicis){
+                        Bicicleta.removeByCode(1, (err, cb) => {
+                            Bicicleta.allBicis((err, bicis) => {
                                 expect(bicis.length).toBe(0)
                             
                                 done()

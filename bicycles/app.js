@@ -1,27 +1,25 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-let biciRouter = require('./routes/bicicletas')
-let biciRouterAPI = require('./routes/api/bicicletas')
-let usuariosAPIRouter = require('./routes/api/usuarios')
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const usersRouterAPI = require('./routes/api/usuarios')
+const biciRouter = require('./routes/bicicletas')
+const biciRouterAPI = require('./routes/api/bicicletas')
+const tokenRouter = require('./routes/token')
 
-let usuariosRouter = require('./routes/usuarios')
-let tokenRouter = require('./routes/token')
-
-var app = express();
+const app = express();
 
 //Setup mongoose
-var mongoose = require('mongoose')
-var mongoDB = 'mongodb://localhost:27017/red_bicicletas'
+const mongoose = require('mongoose')
+const mongoDB = 'mongodb://localhost:27017/red_bicicletas'
 
 mongoose.connect(mongoDB, { useNewUrlParser: true })
 mongoose.Promise = global.Promise
-var db = mongoose.connection
+const db = mongoose.connection
 
 db.on('error', console.error.bind(console, 'MongoDB connection error: '))
 //db.on('open', console.log.bind(console, 'MongoDB connection ok '))
@@ -38,20 +36,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/api/usuarios', usersRouterAPI);
 app.use('/bicicletas', biciRouter);
 app.use('/api/bicicletas', biciRouterAPI);
-app.use('/api/usuarios', usuariosAPIRouter);
-app.use('/usuarios', usuariosRouter);
 app.use('/token', tokenRouter);
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
