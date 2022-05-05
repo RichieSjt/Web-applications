@@ -14,4 +14,3 @@ reservaSchema.methods.diasDeReserva = function() {
 }
 
 module.exports = mongoose.model('Reserva', reservaSchema) 
-
