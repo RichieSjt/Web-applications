@@ -11,18 +11,9 @@ const biciRouter = require('./routes/bicicletas')
 const biciRouterAPI = require('./routes/api/bicicletas')
 const tokenRouter = require('./routes/token')
 
+const db = require('./db/mongoose')
+
 const app = express();
-
-//Setup mongoose
-const mongoose = require('mongoose')
-const mongoDB = 'mongodb://localhost:27017/red_bicicletas'
-
-mongoose.connect(mongoDB, { useNewUrlParser: true })
-mongoose.Promise = global.Promise
-const db = mongoose.connection
-
-db.on('error', console.error.bind(console, 'MongoDB connection error: '))
-//db.on('open', console.log.bind(console, 'MongoDB connection ok '))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

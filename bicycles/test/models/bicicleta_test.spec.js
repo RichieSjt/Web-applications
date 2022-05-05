@@ -1,121 +1,98 @@
-const mongoose = require('mongoose')
+const { expect } = require('chai')
 const Bicicleta = require('../../models/bicicleta')
-const assert = require('assert')
+const db = require('../../db/mongoose')
+
+const bicycle1 = {
+    code: 1,
+    color: 'green',
+    modelo: 'urban',
+    ubicacion: [19.28, -80.13]
+}
+
+const bicycle2 = {
+    code: 2,
+    color: 'white',
+    modelo: 'mountain',
+    ubicacion: [19.28, -80.13],
+}
 
 describe('Testing bicicletas', () => {
-    beforeEach((done) => {
-        const mongoDB = 'mongodb://localhost:27017/red_bicicletas'
-        mongoose.connect(mongoDB, {useNewUrlParser: true})
-
-        const db = mongoose.connection
-        db.on('error', console.error.bind(console, 'connection error'))
-        db.once('open', () => {
-            done()
-        })
+    afterEach(async () => {
+        await Bicicleta.deleteMany({})
     })
-
-    afterEach((done) => {
-        Bicicleta.deleteMany({}, (err, success) =>{
-            if(err) console.log(err)
-            const db = mongoose.connection
-            db.close()
-            done()
-        })
-    })
-
-    //Tests...
 
     //Checar el createInstance
     describe('Bicicleta.createInstance', () => {
-        it('crea una instancia de la bicicleta', () => {
-            let bici = Bicicleta.createInstance(1, 'verde', 'urbana', [19.28, -99.13])
+        it('Creates a bicycle instance', () => {
+            const bicycle = new Bicicleta(bicycle1)
 
-            expect(bici.code).toBe(1)
-            expect(bici.color).toBe('verde')
-            expect(bici.modelo).toBe('urbana')
-            expect(bici.ubicacion[0]).toEqual(19.28)
-            expect(bici.ubicacion[1]).toEqual(-99.13)
+            expect(bicycle.code).to.equal(1)
+            expect(bicycle.color).to.equal('green')
+            expect(bicycle.modelo).to.equal('urban')
+            expect(bicycle.ubicacion[0]).to.equal(19.28)
+            expect(bicycle.ubicacion[1]).to.equal(-80.13)
         })
-    });
+    })
 
     //Checar el allBicis
     describe('Bicicleta.allBicis', () => {
-        it('comienza vacía', (done) => {
-            Bicicleta.allBicis(function(err, bicis){
-                expect(bicis.length).toBe(0)
-                done()
-            })
+        it('Starts empty', async () => {
+            const bicycles = await Bicicleta.allBicis()
+            expect(bicycles.length).to.equal(0)
         })
     })
 
     //Add a bike
     describe('Bicicletas.add', () => {
-        it('agrega una bici', (done)=>{
-            let bici = new Bicicleta({code: 1, color: 'verde', modelo: 'urbana'})
-            Bicicleta.add(bici, (err, newBici) => {
-                if(err) console.log(err)
-                Bicicleta.allBicis((err, bicis) => {
-                    expect(bicis.length).toEqual(1)
-                    expect(bicis[0].code).toEqual(bici.code)
-
-                    done()
-                })
+        it('Adds a bicycle', async () => {
+            const bicycle = new Bicicleta({
+                code: 1,
+                color: 'green',
+                modelo: 'urban',
             })
+
+            await Bicicleta.add(bicycle)
+
+            const bicycles = await Bicicleta.allBicis()
+            expect(bicycles.length).to.equal(1)
+            expect(bicycles[0].code).to.equal(bicycle.code)
+
         })
     })
 
     //Find by code
-    describe('Find a bike by its code', () => {
-        it('should return bike with code 1', (done)=>{
-            Bicicleta.allBicis((err, bicis) => {
-                expect(bicis.length).toBe(0)
+    describe('Find a bicycle by its code', () => {
+        it('should return bike with code 1', async () => {
+            let bicycles = await Bicicleta.allBicis()
+            expect(bicycles.length).to.equal(0)
+            
+            await new Bicicleta(bicycle1).save()
+            await new Bicicleta(bicycle2).save()
 
-                let bici = new Bicicleta({code: 1, color: 'verde', modelo: 'urbana'})
-                Bicicleta.add(bici, (err, newBike) =>{
-                    if(err) console.log(err)
+            bicycles = await Bicicleta.allBicis()
 
-                    let bici2 = new Bicicleta({code: 2, color: 'blanca', modelo: 'montaña'})
-                    Bicicleta.add(bici2, (err, newBike) => {                        
-                        if(err) console.log(err)
+            expect(bicycles.length).to.equal(2)
 
-                        Bicicleta.findByCode(1, (err, targetBici) => {
-                            expect(targetBici.code).toBe(bici.code)
-                            expect(targetBici.color).toBe(bici.color)
-                            expect(targetBici.modelo).toBe(bici.modelo)
-
-                            done()
-                        })
-                    })
-                })
-            })
+            const targetBicycle = await Bicicleta.findByCode(1)
+            expect(targetBicycle.code).to.equal(bicycle1.code)
+            expect(targetBicycle.color).to.equal(bicycle1.color)
+            expect(targetBicycle.modelo).to.equal(bicycle1.modelo)
         })
     })
 
+    // Remove by code
+    describe('Remove a bicycle by its code', () => {
+        it('should delete bike with code 1', async () => {
+            let bicycles = await Bicicleta.allBicis()
+            expect(bicycles.length).to.equal(0)
 
-    //Remove by code
-    describe('Remove a bike by its code', () => {
-        it('should delete bike with code 1', (done)=>{
-            Bicicleta.allBicis((err, bicis) => {
-                expect(bicis.length).toBe(0)
+            await new Bicicleta(bicycle1).save()
+            bicycles = await Bicicleta.allBicis()
+            expect(bicycles.length).to.equal(1)
 
-                let bici = new Bicicleta({code: 1, color: 'verde', modelo: 'urbana'})
-                Bicicleta.add(bici, (err, newBike) => {
-                    if(err) console.log(err)
-                    Bicicleta.allBicis((err, bicis) => {
-                        expect(bicis.length).toBe(1)
-                        Bicicleta.removeByCode(1, (err, cb) => {
-                            Bicicleta.allBicis((err, bicis) => {
-                                expect(bicis.length).toBe(0)
-                            
-                                done()
-                            })
-                        })
-                    })
-                })
-            })
+            await Bicicleta.removeByCode(1)
+            bicycles = await Bicicleta.allBicis()
+            expect(bicycles.length).to.equal(0)
         })
     })
-
-
-
 })

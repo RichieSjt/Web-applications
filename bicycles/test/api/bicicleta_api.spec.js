@@ -1,6 +1,5 @@
-const { assert, expect } = require('chai')
+const { expect } = require('chai')
 const request = require('supertest')
-const mongoose = require('mongoose')
 const app = require('../../app')
 const Bicicleta = require('../../models/bicicleta')
 
@@ -24,7 +23,7 @@ describe('Bicicletas API', () => {
 
     describe('POST BICICLETAS /', () => {
         it('Should return 200 status and the created bicycle', async () => {
-            const bicycle = {
+            const bicyclePost = {
                 code: 3,
                 color: 'green',
                 modelo: 'bmx',
@@ -32,13 +31,13 @@ describe('Bicicletas API', () => {
                 lon: 19.28,
             }
 
-            const res = await request(app).post(bicyclesApiUrl + 'create').send(bicycle)
-            const bicycleRes = res.body.bicicleta
+            const res = await request(app).post(bicyclesApiUrl + 'create').send(bicyclePost)
+            const bicycle = res.body.bicicleta
             
             expect(res.status).to.equal(200)
-            expect(bicycleRes.color).to.equal('green')
-            expect(bicycleRes.ubicacion[0]).to.equal(-99.13)
-            expect(bicycleRes.ubicacion[1]).to.equal(19.28)
+            expect(bicycle.color).to.equal('green')
+            expect(bicycle.ubicacion[0]).to.equal(-99.13)
+            expect(bicycle.ubicacion[1]).to.equal(19.28)
         })
     })
 

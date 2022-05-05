@@ -24,28 +24,20 @@ bicicletaSchema.method.toString = function () {
     return `code: ${this.code}, color: ${this.color}`
 }
 
-bicicletaSchema.statics.allBicis = function allBicis(cb) {
-    return this.find({}, cb)
+bicicletaSchema.statics.allBicis = function allBicis() {
+    return this.find()
 }
 
-bicicletaSchema.statics.add = function (aBici, cb) {
-    this.create(aBici, cb)
+bicicletaSchema.statics.add = function (aBici) {
+    this.create(aBici)
 }
 
-bicicletaSchema.statics.findByCode = function (aCode, cb) {
-    return this.findOne({ code: aCode }, cb)
-    // this.findOne({code: aCode }, function (err, docs) {
-    //     if (err){
-    //         console.log(err)
-    //     }
-    //     else{
-    //         return docs
-    //     }
-    // });
+bicicletaSchema.statics.findByCode = function (aCode) {
+    return this.findOne({ code: aCode })
 }
 
-bicicletaSchema.statics.removeByCode = function (aCode, cb) {
-    return this.deleteOne({ code: aCode }, cb)
+bicicletaSchema.statics.removeByCode = function (aCode) {
+    return this.deleteOne({ code: aCode })
 }
 
 module.exports = mongoose.model('Bicicleta', bicicletaSchema)
