@@ -56,14 +56,13 @@ usuarioSchema.methods.validPassword = function(password){
     return bcrypt.compare(password, this.password)
 }
 
-usuarioSchema.methods.reservar = async (biciId, desde, hasta) => {
+usuarioSchema.methods.reservar = async function (biciId, desde, hasta) {
     const reserva = new Reserva({
         usuario: mongoose.Types.ObjectId(this._id),
         bicicleta: mongoose.Types.ObjectId(biciId),
         desde: desde,
         hasta: hasta,
     })
-    console.log(reserva)
     await reserva.save()
 }
 

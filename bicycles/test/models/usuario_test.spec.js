@@ -39,12 +39,11 @@ describe('Testing usuarios', function(){
             await user.reservar(bicycle._id, today, tomorrow)
             
             const reservations = await Reserva.find({}).populate('bicicleta').populate('usuario').exec()
-            console.log("####################" +reservations)
 
             expect(reservations.length).to.equal(1)
             expect(reservations[0].diasDeReserva()).to.equal(2)
             expect(reservations[0].bicicleta.code).to.equal(1)
-            expect(reservations[0].usuario.nombre).to.equal(usuario.nombre)
+            expect(reservations[0].usuario.nombre).to.equal(user.nombre)
         })
     }); 
 })
