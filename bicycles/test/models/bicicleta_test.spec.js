@@ -43,20 +43,13 @@ describe('Testing bicicletas', () => {
     })
 
     //Add a bike
-    describe('Bicicletas.add', () => {
+    describe('Bicicletas.create', () => {
         it('Adds a bicycle', async () => {
-            const bicycle = new Bicicleta({
-                code: 1,
-                color: 'green',
-                modelo: 'urban',
-            })
-
-            await Bicicleta.add(bicycle)
+            await Bicicleta.create(bicycle1)
 
             const bicycles = await Bicicleta.allBicis()
             expect(bicycles.length).to.equal(1)
-            expect(bicycles[0].code).to.equal(bicycle.code)
-
+            expect(bicycles[0].code).to.equal(bicycle1.code)
         })
     })
 
@@ -66,8 +59,8 @@ describe('Testing bicicletas', () => {
             let bicycles = await Bicicleta.allBicis()
             expect(bicycles.length).to.equal(0)
             
-            await new Bicicleta(bicycle1).save()
-            await new Bicicleta(bicycle2).save()
+            await Bicicleta.create(bicycle1)
+            await Bicicleta.create(bicycle2)
 
             bicycles = await Bicicleta.allBicis()
 
@@ -86,7 +79,7 @@ describe('Testing bicicletas', () => {
             let bicycles = await Bicicleta.allBicis()
             expect(bicycles.length).to.equal(0)
 
-            await new Bicicleta(bicycle1).save()
+            await Bicicleta.create(bicycle1)
             bicycles = await Bicicleta.allBicis()
             expect(bicycles.length).to.equal(1)
 

@@ -14,19 +14,25 @@ exports.bicicleta_list = function(req, res){
     })
 }
 
-exports.bicicleta_create = function(req, res){
-    
-    let bici = Bicicleta.createInstance(req.body.code, req.body.color, req.body.modelo, [req.body.lat, req.body.lon])
-    Bicicleta.add(bici)
-    
+exports.bicicleta_create = async (req, res) => {
+    const { id, color, modelo, lat, lon } = req.body
+
+    const bici = {
+        code: id,
+        color: color,
+        modelo: modelo,
+        ubicacion: [lat, lon],
+    }
+
+    await Bicicleta.create(bici)
 
     res.status(200).json({
-        bicicleta: bici
+        bicicleta: bici,
     })
 }
 
 exports.bicicleta_delete = function(req, res){
-    Bicicleta.removeById(req.body.id)
+    Bicicleta.removeByCode(req.body.code)
     res.status(204).send()
 }
 

@@ -11,9 +11,18 @@ exports.bicicleta_create_get = function (req, res) {
     res.render('bicicletas/create')
 }
 
-exports.bicicleta_create_post = function (req, res) {
-    let bici = Bicicleta.createInstance(req.body.id, req.body.color, req.body.modelo, [req.body.lon, req.body.lat])
-    Bicicleta.add(bici)
+exports.bicicleta_create_post = async (req, res) => {
+    const { id, color, modelo, lat, lon } = req.body
+    
+    const bici = {
+        code: id, 
+        color: color, 
+        modelo: modelo, 
+        ubicacion: [lat, lon]
+    }
+
+    await Bicicleta.create(bici)
+    
     res.redirect('/bicicletas')
 }
 
