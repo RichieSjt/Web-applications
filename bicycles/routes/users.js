@@ -2,8 +2,8 @@ let express = require('express');
 let router = express.Router();
 let usuariosController = require('../controllers/usuarios')
 
-
 router.get('/', usuariosController.list)
+router.post('/login', usuariosController.login_post)
 router.get('/create', usuariosController.create_get)
 router.post('/create', usuariosController.create)
 router.get('/:id/update', usuariosController.update_get)

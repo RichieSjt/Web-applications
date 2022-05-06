@@ -1,4 +1,6 @@
 const Bicicleta = require('../models/bicicleta')
+const Reserva = require('../models/reserva')
+const Usuario = require('../models/usuario')
 
 exports.bicicleta_list = function (req, res) {
     Bicicleta.find({}, function (err, bicis) {
@@ -50,3 +52,45 @@ exports.bicicleta_update_post = function (req, res) {
     });
 
 } 
+
+exports.bicicleta_reservar_get = async (req, res) => {
+    const bicycles = await Bicicleta.find({})
+    
+    //Checar sesión
+    session = req.session;
+    if (session && session.userid) {
+
+        const reservations = await Reserva.find({}).populate('bicicleta').populate('usuario').exec()
+
+        console.log(reservations)
+        res.render('bicicletas/reserve', { bicis: bicycles, uid: session.userid, reservas: reservations })
+    } else {
+        res.redirect('/')
+    }
+}
+
+exports.bicicleta_reservar_post = async (req, res) => {
+    //Encontrar al usuario que hará la reserva
+    const user = await Usuario.findOne({ email: req.body.uid })
+
+    //Encontrar la bicicleta que se reservará
+    const bicycle = await Bicicleta.findByCode(req.body.code)
+
+    //Hacer la reserva
+    console.log('haciendo la reserva')
+    let hoy = new Date()
+    let mañana = new Date()
+    mañana.setDate(hoy.getDate() + 1)
+
+    await user.reservar(bicycle.id, hoy, mañana)
+
+    Bicicleta.find({})
+
+    //Checar sesión
+    session = req.session
+    if (session && session.userid) {
+        res.redirect('reservar')
+    } else {
+        res.redirect('/')
+    }
+}

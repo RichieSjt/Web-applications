@@ -1,10 +1,50 @@
 
 
 const Usuario = require('../models/usuario')
+const bcrypt = require('bcrypt')
 
 exports.list = async (req, res, next) => {
     const users = await Usuario.find({})
     res.render('usuarios/index', {usuarios: users})
+}
+
+exports.login_post = async (req, res, next) => {
+    const { email, password } = req.body
+    
+    if (!email || !password) {
+        res.render('index', {
+            errors: { message: 'Favor de llenar ambos campos' },
+        })
+        return
+    }
+    
+    const user = await Usuario.findOne({email: email})
+    console.log(user)
+
+    //Login
+    if(!user) {
+        res.render('index', {
+            errors: { message: 'No existe ese usuario' },
+        })
+        return
+    }
+
+    // check user password with hashed password stored in the database
+    const validPassword = await bcrypt.compare(password, user.password)
+
+    if (validPassword) {
+        //Crear sesión y redireccionar a la parte segura de reserva de bicis:
+        session = req.session
+        session.userid = email
+        console.log(req.session)
+        res.redirect('/home')
+        return
+    } else {
+        res.render('index', {
+            errors: { message: 'Password incorrecto' },
+        })
+        return
+    }
 }
 
 exports.update_get = function(req, res, next){
