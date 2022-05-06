@@ -1,8 +1,37 @@
 html, body {
-    margin: 10px;
+    margin: 0;
     padding: 0;
 }
 
 h1{
     margin: 20px 10px;
+}
+
+.header > nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    padding: 0.625rem 1.5rem;
+}
+
+.main-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+    gap: 1rem;
+}
+
+.main-menu > li {
+    list-style-type: none;
+}
+
+.main-content {
+    padding: 0 1.5rem;
+}
+
+.react-logo {
+    width: 40px;
 }
