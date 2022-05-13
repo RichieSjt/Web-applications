@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React - quick test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header */
+        header {
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100px;
+        }
+
+        header .airbnb-logo {
+            max-width: 100px;
+            padding: 20px 0 14px 20px;
+        }
+
+        nav h1 {
+            font-family: sans-serif;
+            font-size: 16px;
+            display: inline;
+            vertical-align: middle;
+            display: none;
+        }
+
+        nav img {
+            max-width: 40px;
+            vertical-align: middle;
+        }
+
+        .user {
+            border: 1px solid #ccc;
+            border-radius: 50px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 20px;
+        }
+
+        .user .menu {
+            max-width: 30px;
+            padding: 0;
+            margin: 0;
+            vertical-align: middle;
+        }
+
+        .user .user-pic {
+            border-radius: 50%;
+            vertical-align: baseline;
+            vertical-align: middle;
+            padding: 5px;
+        }
+
+        @media screen and (min-width: 420px) {
+            nav h1 {
+                display: inline;
+            }
+        }
+
+
+        /* Cards Section */
+        section {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        section h1 {
+            font-family: sans-serif;
+        }
+
+        .cards-container {
+            text-align: center;
+        }
+
+        /* Cards */
+        .card {
+            width: 240px;
+            overflow: hidden;
+            position: relative;
+            font-family: 'Arial', sans-serif;
+            display: inline-block;
+            margin: 20px 20px;
+            text-align: left;
+        }
+
+        .card .card-image {
+            border-radius: 14px;
+        }
+
+        .card .like {
+            position: absolute;
+            top: 8px;
+            right: 10px;
+            width: 50px;
+            opacity: 0.5;
+        }
+
+        .card .star {
+            width: 30px;
+            vertical-align: middle;
+        }
+
+        .card .rating {
+            font-weight: 100;
+        }
+
+        .card .reviews {
+            font-weight: 100;
+            color: #bbb;
+            padding: 0 3px;
+        }
+
+        .card .country {
+            font-weight: 100;
+            color: #bbb;
+        }
+
+        .card .price {
+            font-weight: bold;
+            color: black;
+            margin: 10px 0;
+        }
+
+        .card .price {
+            font-weight: bold;
+            color: black;
+            margin: 10px 0;
+        }
+
+        .card .price span {
+            font-weight: 100;
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: #f7f7f7;
+        }
+
+        footer .footer-menu {
+            display: flex;
+            justify-content: center;
+        }
+
+        footer ul {
+            font-family: sans-serif;
+            font-size: 13px;
+            padding: 20px;
+            margin: 0 30px;
+        }
+
+        footer ul li:nth-child(1) {
+            font-weight: bold;
+        }
+
+        footer ul li {
+            list-style-type: none;
+            margin: 16px 0;
+        }
+
+        .footer-bottom {
+            padding-top: 24px;
+            padding-bottom: 24px;
+            border-top: 1px solid #DDDDDD;
+            font-family: sans-serif;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .footer-bottom p{
+            display: inline-block;
+        }
+        
+        .footer-bottom .world{
+            width: 30px;
+            display: inline;
+            vertical-align: middle;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="#."><img src="img/aribnb-logo.png" class='airbnb-logo' /></a>
+        <nav>
+            <h1>Become a Host</h1>
+            <img src="img/world.svg" />
+            <div class="user">
+                <img src="img/menu.svg" class="menu" />
+                <img src="https://picsum.photos/200" class="user-pic" />
+            </div>
+        </nav>
+    </header>
+    <section class="cards">
+        <h1>Plan a trip with help from local Hosts around the world</h1>
+        <div class="cards-container">
+            <div class="card">
+                <img src="https://picsum.photos/240/340?r=0" class="card-image" />
+                <img src="img/heart.svg" class="like" />
+                <img src="img/star.svg" class="star" /><span class="rating">4.98</span><span class="reviews">(130)</span><span class="country">· United States</span>
+                <p class="place">Plan The Perfect New York Vacation</p>
+                <p class="price">From $102 MXN / <span>person</span></p>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/240/340?r=1" class="card-image" />
+                <img src="img/heart.svg" class="like" />
+                <img src="img/star.svg" class="star" /><span class="rating">4.98</span><span class="reviews">(130)</span><span class="country">· United States</span>
+                <p class="place">Plan The Perfect New York Vacation</p>
+                <p class="price">From $102 MXN / <span>person</span></p>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/240/340?r=2" class="card-image" />
+                <img src="img/heart.svg" class="like" />
+                <img src="img/star.svg" class="star" /><span class="rating">4.98</span><span class="reviews">(130)</span><span class="country">· United States</span>
+                <p class="place">Plan The Perfect New York Vacation</p>
+                <p class="price">From $102 MXN / <span>person</span></p>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/240/340?r=3" class="card-image" />
+                <img src="img/heart.svg" class="like" />
+                <img src="img/star.svg" class="star" /><span class="rating">4.98</span><span class="reviews">(130)</span><span class="country">· United States</span>
+                <p class="place">Plan The Perfect New York Vacation</p>
+                <p class="price">From $102 MXN / <span>person</span></p>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/240/340?r=4" class="card-image" />
+                <img src="img/heart.svg" class="like" />
+                <img src="img/star.svg" class="star" /><span class="rating">4.98</span><span class="reviews">(130)</span><span class="country">· United States</span>
+                <p class="place">Plan The Perfect New York Vacation</p>
+                <p class="price">From $102 MXN / <span>person</span></p>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/240/340?r=5" class="card-image" />
+                <img src="img/heart.svg" class="like" />
+                <img src="img/star.svg" class="star" /><span class="rating">4.98</span><span class="reviews">(130)</span><span class="country">· United States</span>
+                <p class="place">Plan The Perfect New York Vacation</p>
+                <p class="price">From $102 MXN / <span>person</span></p>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/240/340?r=6" class="card-image" />
+                <img src="img/heart.svg" class="like" />
+                <img src="img/star.svg" class="star" /><span class="rating">4.98</span><span class="reviews">(130)</span><span class="country">· United States</span>
+                <p class="place">Plan The Perfect New York Vacation</p>
+                <p class="price">From $102 MXN / <span>person</span></p>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/240/340?r=7" class="card-image" />
+                <img src="img/heart.svg" class="like" />
+                <img src="img/star.svg" class="star" /><span class="rating">4.98</span><span class="reviews">(130)</span><span class="country">· United States</span>
+                <p class="place">Plan The Perfect New York Vacation</p>
+                <p class="price">From $102 MXN / <span>person</span></p>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/240/340?r=8" class="card-image" />
+                <img src="img/heart.svg" class="like" />
+                <img src="img/star.svg" class="star" /><span class="rating">4.98</span><span class="reviews">(130)</span><span class="country">· United States</span>
+                <p class="place">Plan The Perfect New York Vacation</p>
+                <p class="price">From $102 MXN / <span>person</span></p>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/240/340?r=9" class="card-image" />
+                <img src="img/heart.svg" class="like" />
+                <img src="img/star.svg" class="star" /><span class="rating">4.98</span><span class="reviews">(130)</span><span class="country">· United States</span>
+                <p class="place">Plan The Perfect New York Vacation</p>
+                <p class="price">From $102 MXN / <span>person</span></p>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/240/340?r=10" class="card-image" />
+                <img src="img/heart.svg" class="like" />
+                <img src="img/star.svg" class="star" /><span class="rating">4.98</span><span class="reviews">(130)</span><span class="country">· United States</span>
+                <p class="place">Plan The Perfect New York Vacation</p>
+                <p class="price">From $102 MXN / <span>person</span></p>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/240/340?r=11" class="card-image" />
+                <img src="img/heart.svg" class="like" />
+                <img src="img/star.svg" class="star" /><span class="rating">4.98</span><span class="reviews">(130)</span><span class="country">· United States</span>
+                <p class="place">Plan The Perfect New York Vacation</p>
+                <p class="price">From $102 MXN / <span>person</span></p>
+            </div>
+            <div class="card">
+                <img src="https://picsum.photos/240/340?r=12" class="card-image" />
+                <img src="img/heart.svg" class="like" />
+                <img src="img/star.svg" class="star" /><span class="rating">4.98</span><span class="reviews">(130)</span><span class="country">· United States</span>
+                <p class="place">Plan The Perfect New York Vacation</p>
+                <p class="price">From $102 MXN / <span>person</span></p>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-menu">
+            <ul>
+                <li>Support</li>
+                <li>Help Center</li>
+                <li>AirCover</li>
+                <li>Safety information</li>
+                <li>Supporting people with disabilities</li>
+                <li>Cancellation options</li>
+                <li>Our COVID-19 Response</li>
+                <li>Report a neighborhood concern</li>
+            </ul>
+            <ul>
+                <li>Community</li>
+                <li>Airbnb.org: disaster relief housing</li>
+                <li>Support Afghan refugees</li>
+                <li>Combating discrimination</li>
+            </ul>
+            <ul>
+                <li>Hosting</li>
+                <li>Try hosting</li>
+                <li>AirCover for Hosts</li>
+                <li>Explore hosting resources</li>
+                <li>Visit our community forum</li>
+                <li>How to host responsibly</li>
+            </ul>
+            <ul>
+                <li>About</li>
+                <li>Newsroom</li>
+                <li>Learn about new features</li>
+                <li>Letter from our founders</li>
+                <li>Careers</li>
+                <li>Investors</li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2022 Airbnb, Inc. · Privacy · Terms · Sitemap</p>
+            <p><img src="img/world.svg" class='world' />English (US) Choose a currency $MXN </p>
+        </div>
+    </footer>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
