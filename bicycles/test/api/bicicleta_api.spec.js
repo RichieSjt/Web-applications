@@ -14,7 +14,7 @@ const bicycle1 = {
 }
 
 describe('Bicicletas API', () => {
-    afterEach(async () => {
+    beforeEach(async () => {
         await Bicicleta.deleteMany({})
     })
 

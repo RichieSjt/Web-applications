@@ -17,7 +17,7 @@ const bicycle2 = {
 }
 
 describe('Testing bicicletas', () => {
-    afterEach(async () => {
+    beforeEach(async () => {
         await Bicicleta.deleteMany({})
     })
 

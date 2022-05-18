@@ -17,7 +17,7 @@ const bicycle1 = {
 }
 
 describe('Testing usuarios', function(){
-    afterEach(async () => {
+    beforeEach(async () => {
         await Bicicleta.deleteMany({})
         await Usuario.deleteMany({})
         await Reserva.deleteMany({})
