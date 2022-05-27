@@ -1,19 +1,9 @@
 import React from 'react'
 import Card from './Card'
-
-const cardDetails = {
-    rating: 4.98,
-    reviews: 130,
-    country: 'United States',
-    place: 'New York',
-    price: 102,
-}
+import data from '../data/data'
 
 const MainContent = () => {
-    const numberOfCards = 13
-    const cards = [...Array(numberOfCards)]
-
-    const content = cards.map((item, i) => <Card cardDetails={cardDetails} index={i} key={i}/>)
+    const content = data.map((item, i) => <Card cardDetails={item} id={item.id} key={i}/>)
 
     return (
         <section className='cards'>
